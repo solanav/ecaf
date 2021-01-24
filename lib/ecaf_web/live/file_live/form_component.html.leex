@@ -1,0 +1,57 @@
+<%= f = form_for @changeset, "#",
+  id: "file-form",
+  multipart: true,
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+
+  <!-- <p style="color:red"> If you don't have the beta password, you will need to wait for an admin to approve your file.</p> -->
+  <p style="color:red"> Después de subir un archivo deberás esperar a que un admin lo apruebe.</p>
+
+  <%= label f, :beta_password, "Beta password (opcional)" %>
+  <%= password_input f, :beta_password, value: @password %>
+  <%= error_tag f, :beta_password %>
+
+  <%= label f, :uploader, "Tu nombre (opcional)" %>
+  <%= text_input f, :uploader %>
+  <%= error_tag f, :uploader %>
+
+  <%= label f, :description, "Descripción (opcional)" %>
+  <%= textarea f, :description %>
+  <%= error_tag f, :description %>
+
+  <%= label f, :type, "Tipo" %>
+  <%= select f, :type, Ecaf.FormLists.types %>
+  <%= error_tag f, :type %>
+
+  <%= label f, :faculty, "Facultad" %>
+  <%= select f, :faculty, Ecaf.FormLists.faculties %>
+  <%= error_tag f, :faculty %>
+
+  <%= label f, :degree, "Carrera" %>
+  <%= select f, :degree, [nil] ++ Ecaf.FormLists.degrees(@faculty) %>
+  <%= error_tag f, :degree %>
+
+  <%= label f, :course, "Asignatura" %>
+  <%= select f, :course, [nil] ++ Ecaf.FormLists.courses(@faculty, @degree) %>
+  <%= error_tag f, :course %>
+
+  <%= label f, :professor, "Profesor (opcional)" %>
+  <%= text_input f, :professor %>
+  <%= error_tag f, :professor %>
+
+  <%= label f, :file, "Archivo(s)" %>
+
+  <%= Phoenix.LiveView.Helpers.live_file_input @uploads.avatar %>
+  <%= error_tag f, :file %>
+
+  <%= for entry <- @uploads.avatar.entries do %>
+    <br>
+    <%= entry.client_name %> - <%= entry.progress %>%
+  <% end %>
+
+  <!-- <p>You can upload up to 16 files at a time. The uploader, description, type, degree and course will be the same for all of them.</p> -->
+  <p>Puedes subir hasta 16 archivos a la vez. Tu nombre, descripcion, tipo, carrera y asignatura serán los mismos para todos.</p>
+
+  <%= submit "Save", phx_disable_with: "Saving..." %>
+</form>

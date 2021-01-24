@@ -1,0 +1,112 @@
+<%= if @live_action in [:new, :edit] do %>
+<%= live_modal @socket, EcafWeb.FileLive.FormComponent,
+  id: @file.id || :new,
+  title: @page_title,
+  faculty: @faculty,
+  degree: @degree,
+  action: @live_action,
+  file: @file,
+  password: "",
+  return_to: Routes.file_index_path(@socket, :index) %>
+<% end %>
+
+<nav class="navbar navbar-expand-lg">
+  <img src="<%= Routes.static_path(@socket, "/images/path38.png") %>" width="30" height="30"
+    class="d-inline-block align-top" alt="">
+  <span><%= live_patch "Subir Archivo", to: Routes.file_index_path(@socket, :new) %></span>
+</nav>
+
+<div class="content">
+  <%= f = form_for :search_terms, "", phx_change: "search" %>
+  <div class="form-row">
+    <div class="form-group col-md-8">
+      <%= label f, :name, "Nombre" %>
+      <%= text_input f, :name, value: @search_terms["name"] %>
+      <%= error_tag f, :name %>
+    </div>
+
+    <div class="form-group col-md-4">
+      <%= label f, :type, "Tipo" %>
+      <%= select f, :type, ["All"] ++ Ecaf.FormLists.types, value: @search_terms["type"] %>
+      <%= error_tag f, :type %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :faculty, "Facultad" %>
+    <%= select f, :faculty, ["All"] ++ Ecaf.FormLists.faculties, value: @search_terms["faculty"] %>
+    <%= error_tag f, :faculty %>
+
+    <%= label f, :degree, "Carrera" %>
+    <%= select f, :degree, ["All"] ++ Ecaf.FormLists.degrees(@faculty), value: @search_terms["degree"] %>
+    <%= error_tag f, :degree %>
+
+    <%= label f, :course, "Asignatura" %>
+    <%= select f, :course, ["All"] ++ Ecaf.FormLists.courses(@faculty, String.split(@degree, "/") |> Enum.at(1)), value: @search_terms["course"] %>
+    <%= error_tag f, :course %>
+  </div>
+  </form>
+
+  <h2>Encontrados <%= @num_files %> archivos</h2>
+
+  <%= for file <- @files do %>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+          <h5 class="card-title">
+            <a href="<%= Routes.static_path(@socket, "/uploads/#{file.backname}") %>">
+              <%= file.name %>
+            </a>
+            [<a href="ipfs://<%= file.ipfs_hash %>">
+              IPFS Download
+            </a>]
+          </h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+            <%= if file.type == "Libros" do %>
+              <i class="fas fa-book"></i>
+            <% end %>
+
+            <%= if file.type == "Apuntes" do %>
+              <i class="fas fa-pencil-alt"></i>
+            <% end %>
+
+            <%= if file.type == "Examenes" do %>
+              <i class="fas fa-file-alt"></i>
+            <% end %>
+
+            <%= if file.type == "Ejercicios" do %>
+              <i class="fas fa-dumbbell"></i>
+            <% end %>
+
+            <%= if file.type == "Practicas" do %>
+              <i class="fas fa-tools"></i>
+            <% end %>
+
+            <%= if file.type == "Otros" do %>
+              <i class="fas fa-question"></i>
+            <% end %>
+          <%= file.type %>
+          &nbsp; <%= Ecaf.FormLists.simplify(file.degree, :text) %>
+          &nbsp; <%= Ecaf.FormLists.simplify(file.course, :text) %>
+        </h6>
+        <p class="card-text">
+          <%= if file.description == "none" do %>
+            No hay descripción.
+          <% else %>
+            <%= file.description %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script>
+$(document).ready(function () {
+  $(window).keydown(function (event) {
+    if (event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>

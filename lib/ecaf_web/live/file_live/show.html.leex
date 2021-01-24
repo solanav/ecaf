@@ -1,0 +1,62 @@
+<h1>Show File</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, EcafWeb.FileLive.FormComponent,
+    id: @file.id,
+    title: @page_title,
+    action: @live_action,
+    file: @file,
+    return_to: Routes.file_show_path(@socket, :show, @file) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Backname:</strong>
+    <%= @file.backname %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @file.name %>
+  </li>
+
+  <li>
+    <strong>Uploader:</strong>
+    <%= @file.uploader %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @file.description %>
+  </li>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @file.type %>
+  </li>
+
+  <li>
+    <strong>University:</strong>
+    <%= @file.university %>
+  </li>
+
+  <li>
+    <strong>Degree:</strong>
+    <%= @file.degree %>
+  </li>
+
+  <li>
+    <strong>Year:</strong>
+    <%= @file.year %>
+  </li>
+
+  <li>
+    <strong>Course:</strong>
+    <%= @file.course %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.file_show_path(@socket, :edit, @file), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.file_index_path(@socket, :index) %></span>

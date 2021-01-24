@@ -1,0 +1,49 @@
+Initializing daemon...
+go-ipfs version: 0.7.0
+Repo version: 10
+System version: amd64/linux
+Golang version: go1.14.4
+Swarm listening on /ip4/127.0.0.1/tcp/4001
+Swarm listening on /ip4/127.0.0.1/udp/4001/quic
+Swarm listening on /ip4/172.21.107.225/tcp/4001
+Swarm listening on /ip4/172.21.107.225/udp/4001/quic
+Swarm listening on /ip6/::1/tcp/4001
+Swarm listening on /ip6/::1/udp/4001/quic
+Swarm listening on /p2p-circuit
+Swarm announcing /ip4/127.0.0.1/tcp/4001
+Swarm announcing /ip4/127.0.0.1/udp/4001/quic
+Swarm announcing /ip4/172.21.107.225/tcp/4001
+Swarm announcing /ip4/172.21.107.225/udp/4001/quic
+Swarm announcing /ip4/79.154.140.207/tcp/14817
+Swarm announcing /ip4/79.154.140.207/udp/55947/quic
+Swarm announcing /ip6/::1/tcp/4001
+Swarm announcing /ip6/::1/udp/4001/quic
+API server listening on /ip4/127.0.0.1/tcp/5001
+WebUI: http://127.0.0.1:5001/webui
+Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/8080
+Daemon is ready
+Initializing daemon...
+go-ipfs version: 0.7.0
+Repo version: 10
+System version: amd64/linux
+Golang version: go1.14.4
+Swarm listening on /ip4/127.0.0.1/tcp/4001
+Swarm listening on /ip4/127.0.0.1/udp/4001/quic
+Swarm listening on /ip4/172.21.97.91/tcp/4001
+Swarm listening on /ip4/172.21.97.91/udp/4001/quic
+Swarm listening on /ip6/::1/tcp/4001
+Swarm listening on /ip6/::1/udp/4001/quic
+Swarm listening on /p2p-circuit
+Swarm announcing /ip4/127.0.0.1/tcp/4001
+Swarm announcing /ip4/127.0.0.1/udp/4001/quic
+Swarm announcing /ip4/172.21.97.91/tcp/4001
+Swarm announcing /ip4/172.21.97.91/udp/4001/quic
+Swarm announcing /ip4/79.154.140.207/tcp/14841
+Swarm announcing /ip4/79.154.140.207/udp/2908/quic
+Swarm announcing /ip4/79.154.140.207/udp/55971/quic
+Swarm announcing /ip6/::1/tcp/4001
+Swarm announcing /ip6/::1/udp/4001/quic
+API server listening on /ip4/127.0.0.1/tcp/5001
+WebUI: http://127.0.0.1:5001/webui
+Gateway (readonly) server listening on /ip4/127.0.0.1/tcp/8080
+Daemon is ready
