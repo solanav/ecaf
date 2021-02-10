@@ -1,5 +1,17 @@
 # Ecaf
 
+This is a file sharing platform for universities. Uploaded files will get saved to disk and pinned to the IPFS network.
+
+<hr>
+
+![demo](demo.png)
+
+<hr>
+
+# Starting the server for development
+
+Make sure you have a Postgres database running and erlang and elixir installed in the computer. If you want to use IPFS, you need to run a go-ipfs instance on the server.
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
@@ -9,12 +21,4 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+Ready to run in production? You can just use the `run_prod.sh` script (with the appropiate modifications).
