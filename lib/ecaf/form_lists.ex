@@ -1,4 +1,6 @@
 defmodule Ecaf.FormLists do
+  @universityjson "nuam.json"
+
   def universities do
     [
       "Universidad Autonoma de Madrid"
@@ -10,8 +12,10 @@ defmodule Ecaf.FormLists do
       "Examenes",
       "Ejercicios",
       "Apuntes",
-      "Libros",
       "Practicas",
+      "Videos",
+      "Libros",
+      "Programas",
       "Otros",
     ]
   end
@@ -32,7 +36,7 @@ defmodule Ecaf.FormLists do
   end
 
   def faculties do
-    jsondb = Jason.decode!(File.read!("nuam.json"))
+    jsondb = Jason.decode!(File.read!(@universityjson))
 
     Enum.map(jsondb, fn {_faculty_k, faculty_v} ->
       faculty_v["name"]
@@ -40,7 +44,7 @@ defmodule Ecaf.FormLists do
   end
 
   def degrees(faculty) do
-    jsondb = Jason.decode!(File.read!("nuam.json"))
+    jsondb = Jason.decode!(File.read!(@universityjson))
 
     Enum.map(jsondb[faculty]["degrees"], fn {_degree_k, degree_v} ->
       degree_v["name"]
@@ -49,7 +53,7 @@ defmodule Ecaf.FormLists do
   end
 
   def courses(faculty, degree) do
-    jsondb = Jason.decode!(File.read!("nuam.json"))
+    jsondb = Jason.decode!(File.read!(@universityjson))
 
     case jsondb[faculty]["degrees"][degree] do
       nil -> []

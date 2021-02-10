@@ -53,38 +53,46 @@
     <div class="card" style="width: 18rem;">
       <div class="card-body">
           <h5 class="card-title">
-            <a href="<%= Routes.static_path(@socket, "/uploads/#{file.backname}") %>">
-              <%= file.name %>
-            </a>
-            [<a href="ipfs://<%= file.ipfs_hash %>">
-              IPFS Download
-            </a>]
+            <span>
+              <a href="<%= Routes.static_path(@socket, "/uploads/#{file.backname}") %>">
+                <%= file.name %>
+              </a>
+            </span>
+            <span class="ipfs-download-button">
+              [<a href="ipfs://<%= file.ipfs_hash %>">
+                IPFS Download
+              </a>]
+            </span>
           </h5>
         <h6 class="card-subtitle mb-2 text-muted">
-            <%= if file.type == "Libros" do %>
+            <%= if String.downcase(file.type) == "libros" do %>
               <i class="fas fa-book"></i>
             <% end %>
 
-            <%= if file.type == "Apuntes" do %>
+            <%= if String.downcase(file.type) == "apuntes" do %>
               <i class="fas fa-pencil-alt"></i>
             <% end %>
 
-            <%= if file.type == "Examenes" do %>
+            <%= if String.downcase(file.type) == "examenes" do %>
               <i class="fas fa-file-alt"></i>
             <% end %>
 
-            <%= if file.type == "Ejercicios" do %>
+            <%= if String.downcase(file.type) == "ejercicios" do %>
               <i class="fas fa-dumbbell"></i>
             <% end %>
 
-            <%= if file.type == "Practicas" do %>
+            <%= if String.downcase(file.type) == "practicas" do %>
               <i class="fas fa-tools"></i>
             <% end %>
 
-            <%= if file.type == "Otros" do %>
+            <%= if String.downcase(file.type) == "videos" do %>
+              <i class="fas fa-video"></i>
+            <% end %>
+
+            <%= if String.downcase(file.type) == "otros" do %>
               <i class="fas fa-question"></i>
             <% end %>
-          <%= file.type %>
+          <%= String.capitalize(file.type) %>
           &nbsp; <%= Ecaf.FormLists.simplify(file.degree, :text) %>
           &nbsp; <%= Ecaf.FormLists.simplify(file.course, :text) %>
         </h6>

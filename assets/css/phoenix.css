@@ -7,6 +7,10 @@
 * Copyright (c) 2017 CJ Patoilo Licensed under the MIT license
 */
 
+.ipfs-download-button {
+    float: right;
+}
+
 *,
 *:after,
 *:before {
