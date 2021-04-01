@@ -2,11 +2,9 @@
 
 This is a file sharing platform for universities. Uploaded files will get saved to disk and pinned to the IPFS network.
 
-<hr>
-
-![demo](demo.png)
-
-<hr>
+| Desktop Demo  | Mobile Demo   |
+| ------------- | ------------- |
+![demo](demo.png) | ![demo](demo_mobile.jpg)
 
 # Starting the server for development
 
