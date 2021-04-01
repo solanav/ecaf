@@ -8,6 +8,10 @@ This is a file sharing platform for universities. Uploaded files will get saved 
 
 <hr>
 
+![demo](demo_mobile.png)
+
+<hr>
+
 # Starting the server for development
 
 Make sure you have a Postgres database running and erlang and elixir installed in the computer. If you want to use IPFS, you need to run a go-ipfs instance on the server.
