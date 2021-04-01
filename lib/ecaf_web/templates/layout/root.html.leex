@@ -16,7 +16,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "Root", suffix: " ~ ecaf Beta" %>
+    <%= live_title_tag assigns[:page_title] || "Root", suffix: " ~ UAM" %>
+
+    <link rel="shortcut icon" type="image/png" href="<%= Routes.static_path(@conn, "/images/path38.png") %>"/>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">

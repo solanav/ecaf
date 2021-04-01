@@ -2,10 +2,12 @@ use Mix.Config
 
 # Configure your database
 config :ecaf, Ecaf.Repo,
-  username: "ecaf",
-  password: "1234",
-  database: "ecaf_dev",
-  hostname: "192.168.1.144",
+  username: System.get_env("DB_USERNAME"),
+  password: System.get_env("DB_PASSWORD"),
+  database: System.get_env("DB_DATABASE"),
+  hostname: System.get_env("DB_HOSTNAME"),
+  port: System.get_env("DB_PORT"),
+  template: "template0",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

@@ -8,9 +8,9 @@
   <!-- <p style="color:red"> If you don't have the beta password, you will need to wait for an admin to approve your file.</p> -->
   <p style="color:red"> Después de subir un archivo deberás esperar a que un admin lo apruebe.</p>
 
-  <%= label f, :beta_password, "Beta password (opcional)" %>
-  <%= password_input f, :beta_password, value: @password %>
-  <%= error_tag f, :beta_password %>
+  <%= label f, :admin_password, "Beta password (opcional)" %>
+  <%= password_input f, :admin_password, value: @password %>
+  <%= error_tag f, :admin_password %>
 
   <%= label f, :uploader, "Tu nombre (opcional)" %>
   <%= text_input f, :uploader %>
@@ -20,7 +20,7 @@
   <%= textarea f, :description %>
   <%= error_tag f, :description %>
 
-  <%= label f, :type, "Tipo" %>
+  <%= label f, :type, "Tipo*" %>
   <%= select f, :type, Ecaf.FormLists.types %>
   <%= error_tag f, :type %>
 

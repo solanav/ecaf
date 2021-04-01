@@ -8,9 +8,9 @@ defmodule EcafWeb.FileLive.FormComponent do
     changeset = Files.change_file(file)
 
     {:ok, socket
-     |> assign(assigns)
-     |> assign(:changeset, changeset)
-     |> allow_upload(:avatar, accept: :any, max_entries: 16, max_file_size: 2_000_000_000, auto_upload: true)
+      |> assign(assigns)
+      |> assign(:changeset, changeset)
+      |> allow_upload(:avatar, accept: :any, max_entries: 16, max_file_size: 2_000_000_000, auto_upload: true)
     }
   end
 
@@ -46,15 +46,15 @@ defmodule EcafWeb.FileLive.FormComponent do
       |> assign(:changeset, changeset)
       |> assign(:faculty, faculty)
       |> assign(:degree, degree)
-      |> assign(:password, file_params["beta_password"])
+      |> assign(:password, file_params["admin_password"])
     }
   end
 
   def handle_event("save", %{"file" => file_params}, socket) do
-    password = file_params["beta_password"]
+    password = file_params["admin_password"]
 
     # If password, approve the upload automatically
-    approved = password == "lWVbe3dBcHW9eAci9Vzy"
+    approved = password == System.get_env("ADMIN_PASSWORD")
     file_params = Map.put(file_params, "approved", approved)
 
     # Temporal default parameters

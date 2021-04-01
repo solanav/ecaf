@@ -21,4 +21,10 @@ defmodule Ecaf.IPFS do
         data
       end
   end
+
+  defp parse({:error, e}) do
+    IO.inspect("Failed to add file to IPFS: " <> inspect(e))
+
+    %{"Hash" => "None"}
+  end
 end

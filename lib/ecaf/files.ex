@@ -9,6 +9,40 @@ defmodule Ecaf.Files do
   alias Ecaf.Files.File
 
   @doc """
+  Returns the list of files according to search_terms.
+
+  ## Examples
+
+      iex> search_files(search_terms)
+      [%File{}, ...]
+
+  """
+  def search_files(where_terms) do
+    Keyword.fetch(where_terms, :faculty)
+    query = from u in File,
+      where: ^where_terms,
+      select: u
+
+    Repo.all(query)
+  end
+
+  @doc """
+  Returns the total number of files.
+
+  ## Examples
+
+      iex> total_files
+      1303
+
+  """
+  def total_files() do
+    query = from u in File,
+      select: count(u)
+
+    Repo.one(query)
+  end
+
+  @doc """
   Returns the list of files.
 
   ## Examples

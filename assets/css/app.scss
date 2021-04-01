@@ -23,6 +23,10 @@
     pointer-events: none;
 }
 
+select:disabled {
+    background-color: #2d333b !important;
+}
+
 .phx-modal {
     opacity: 1!important;
     position: fixed;
@@ -37,10 +41,10 @@
 }
 
 .phx-modal-content {
-    background-color: #0d1117;
+    background-color: #1e2228;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #2d333b;
     width: 80%;
 }
 

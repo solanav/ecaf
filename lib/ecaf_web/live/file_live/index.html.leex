@@ -38,11 +38,11 @@
     <%= error_tag f, :faculty %>
 
     <%= label f, :degree, "Carrera" %>
-    <%= select f, :degree, ["All"] ++ Ecaf.FormLists.degrees(@faculty), value: @search_terms["degree"] %>
+    <%= select f, :degree, ["All"] ++ Ecaf.FormLists.degrees(@faculty), value: @search_terms["degree"], disabled: not @faculty_enabled %>
     <%= error_tag f, :degree %>
 
     <%= label f, :course, "Asignatura" %>
-    <%= select f, :course, ["All"] ++ Ecaf.FormLists.courses(@faculty, String.split(@degree, "/") |> Enum.at(1)), value: @search_terms["course"] %>
+    <%= select f, :course, ["All"] ++ Ecaf.FormLists.courses(@faculty, String.split(@degree, "/") |> Enum.at(1)), value: @search_terms["course"], disabled: not @degree_enabled %>
     <%= error_tag f, :course %>
   </div>
   </form>
@@ -59,7 +59,7 @@
               </a>
             </span>
             <span class="ipfs-download-button">
-              [<a href="ipfs://<%= file.ipfs_hash %>">
+              [<a href="https://cloudflare-ipfs.com/ipfs<%= file.ipfs_hash %>">
                 IPFS Download
               </a>]
             </span>

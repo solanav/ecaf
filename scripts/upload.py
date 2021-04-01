@@ -10,11 +10,11 @@ from shutil import copyfile
 import hashlib
 
 conn = psycopg2.connect(
-  database="ecaf_dev",
-  user="ecaf",
-  password="1234",
-  host="192.168.1.144",
-  port="5432"
+  database=os.getenv("DB_DATABASE"),
+  user=os.getenv("DB_USERNAME"),
+  password=os.getenv("DB_PASSWORD"),
+  host=os.getenv("DB_HOSTNAME"),
+  port=os.getenv("DB_PORT")
 )
 cur = conn.cursor()
 
@@ -55,11 +55,11 @@ for d in list_dir("."):
   faculty = d.split(" - ")[0]
 
   print(faculty)
-  
+
   for d2 in list_dir(d):
     degree = d2.split(" - ")[0]
     print(f"\t{degree}")
-    
+
     for d3 in list_dir(d + "/" + d2):
       year = d3
       print(f"\t\t{year}")
@@ -67,7 +67,7 @@ for d in list_dir("."):
       for d4 in list_dir(d + "/" + d2 + "/" + d3):
         course = d4.split(" - ")[0]
         print(f"\t\t\t{course}")
-      
+
         for d5 in list_dir(d + "/" + d2 + "/" + d3 + "/" + d4):
           type_ = unidecode(d5.lower())
           print(f"\t\t\t\t{type_}")
@@ -77,7 +77,7 @@ for d in list_dir("."):
               path = os.path.join(root, name)
               file_name = name
               typp = os.path.isfile(path)
-              
+
               if typp:
                 backname = gen_name(name)
 

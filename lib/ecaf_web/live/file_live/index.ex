@@ -19,6 +19,8 @@ defmodule EcafWeb.FileLive.Index do
         year: "",
         course: ""
       })
+      |> assign(:faculty_enabled, false)
+      |> assign(:degree_enabled, false)
       |> assign(:faculty, @default_faculty)
       |> assign(:degree, @default_degree)
       |> assign(:last_search, "")
@@ -52,21 +54,30 @@ defmodule EcafWeb.FileLive.Index do
   @impl true
   def handle_event("search", %{"search_terms" => search_terms}, socket) do
     # Extract the faculty
-    faculty = if search_terms["faculty"] != "All" do
-      search_terms["faculty"]
-      |> String.split(" - ")
-      |> Enum.at(0)
-    else
-      @default_faculty
+    {faculty, faculty_enabled} = case Map.fetch(search_terms, "faculty") do
+      {:ok, "All"} ->
+        {@default_faculty, false}
+      {:ok, faculty} ->
+        {faculty |> String.split(" - ") |> Enum.at(0), true}
+      :error ->
+        {@default_faculty, false}
     end
 
     # Extract the degree
-    degree = if search_terms["degree"] != "All" do
-      search_terms["degree"]
-      |> String.split(" - ")
-      |> Enum.at(0)
+    {degree, degree_enabled} = case Map.fetch(search_terms, "degree") do
+      {:ok, "All"} ->
+        {@default_degree, false}
+      {:ok, degree} ->
+        {degree |> String.split(" - ") |> Enum.at(0), true}
+      :error ->
+        {@default_degree, false}
+    end
+
+    # If faculty is disabled, disable degree too
+    degree_enabled = if faculty_enabled do
+      degree_enabled
     else
-      @default_degree
+      false
     end
 
     # Remove empty terms
@@ -76,24 +87,13 @@ defmodule EcafWeb.FileLive.Index do
     end)
 
     # Search
-    files = list_files(:infinity)
-    |> Enum.filter(fn f ->
-      {res, _} = Enum.reduce(clean_search_terms, {true, :nc}, fn
-        {"course",     v}, {res,   _} -> {res and String.contains?(String.downcase(    f.course), String.downcase(v)),  :c}
-        {"name",       v}, {res,   c} -> {res and String.contains?(String.downcase(      f.name), String.downcase(v)),   c}
-        {"type",       v}, {res,   c} -> {res and String.contains?(String.downcase(      f.type), String.downcase(v)),   c}
-        {"university", v}, {res,   c} -> {res and String.contains?(String.downcase(f.university), String.downcase(v)),   c}
-        {"year",       v}, {res,   c} -> {res and String.contains?(String.downcase(      f.year), String.downcase(v)),   c}
-        {"degree",     v}, {res, :nc} -> {res and String.contains?(String.downcase(    f.degree), String.downcase(v)), :nc}
-        _, acc -> acc
-      end)
-
-      res
-    end)
+    {files, num_files} = Ecaf.Gugle.search(search_terms)
 
     {:noreply, socket
+      |> assign(:faculty_enabled, faculty_enabled)
+      |> assign(:degree_enabled, degree_enabled)
       |> assign(:files, files |> Enum.take(100))
-      |> assign(:num_files, files |> Enum.count())
+      |> assign(:num_files, num_files)
       |> assign(:search_terms, search_terms)
       |> assign(:last_search, search_terms["name"])
       |> assign(:faculty, faculty)

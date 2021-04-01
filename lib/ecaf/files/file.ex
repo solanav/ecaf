@@ -3,19 +3,27 @@ defmodule Ecaf.Files.File do
   import Ecto.Changeset
 
   schema "files" do
-    field :backname, :string
-    field :course, :string
-    field :degree, :string
-    field :description, :string
-    field :name, :string
-    field :type, :string
+    # University related info
     field :university, :string
-    field :uploader, :string
+    field :faculty, :string
+    field :degree, :string
     field :year, :integer
-    field :hash, :string
+    field :course, :string
+
+    # Properties
+    field :backname, :string
+    field :name, :string
+    field :description, :string
+    field :uploader, :string
+
+    # Extra info
+    field :type, :string
     field :professor, :string
-    field :approved, :boolean
+
+    # Meta
+    field :hash, :string
     field :ipfs_hash, :string
+    field :approved, :boolean
 
     timestamps()
   end
@@ -23,8 +31,8 @@ defmodule Ecaf.Files.File do
   @doc false
   def changeset(file, attrs) do
     file
-    |> cast(attrs, [:backname, :name, :uploader, :description, :type, :university, :degree, :year, :course, :hash, :professor, :approved, :ipfs_hash])
-    |> validate_required([:backname, :name, :type, :university, :degree, :year, :course])
+    |> cast(attrs, [:backname, :name, :uploader, :description, :type, :university, :degree, :year, :course, :hash, :professor, :approved, :ipfs_hash, :faculty])
+    |> validate_required([:backname, :name, :type, :university, :degree, :year, :course, :faculty])
     |> unique_constraint([:backname, :hash])
   end
 end
