@@ -15,8 +15,11 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Busca y sube apuntes de la Universidad Autónoma de Madrid sin anuncios y sin registros.">
+    <meta name="keywords" content="apuntes, uam, universidad, wuolah, buscar, examenes, ejercicios">
+
     <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "Root", suffix: " ~ UAM" %>
+    <%= live_title_tag assigns[:page_title] || "Root", suffix: " ~ UAM Apuntes " <> to_string(Application.spec(:ecaf, :vsn)) %>
 
     <link rel="shortcut icon" type="image/png" href="<%= Routes.static_path(@conn, "/images/path38.png") %>"/>
 
